@@ -99,16 +99,17 @@ function buildGauge(sample) {
 
   // loop through metadata sample and append keys and values from results
   d3.json(metaURL).then(function(data) {
-    console.log("HEYGFUYGB");
     var metaData = d3.select("#gauge");
     
     metaData.html("");
-    var wFreq = data.wfreq;
-    var level = wFreq * 20;
+    var wFreq = data.WFREQ;
+    var level = wFreq;
+    console.log('WFREQ here');
+    console.log(wFreq + "look at me");
 
 
     // Trig to calc meter point
-    var degrees = 180 - level,
+    var degrees = 180 - level * 180/ 9,
         radius = .5;
     var radians = degrees * Math.PI / 180;
     var x = radius * Math.cos(radians);
@@ -194,6 +195,7 @@ function optionChanged(newSample) {
   console.log(newSample);
   buildCharts(newSample);
   buildMetadata(newSample);
+  buildGauge(newSample);
 }
 
 // Initialize the dashboard
